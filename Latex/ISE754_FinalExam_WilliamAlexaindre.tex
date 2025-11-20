@@ -1,0 +1,143 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{comment} % enables the use of multi-line comments (\ifx \fi)
+\usepackage{lipsum} %This package just generates Lorem Ipsum filler text.
+\usepackage{fullpage} % changes the margin
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb,amsthm}  % assumes amsmath package installed
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{tikz}
+    \usetikzlibrary{shapes,arrows}
+    \usetikzlibrary{arrows,calc,positioning}
+
+    \tikzset{
+        block/.style = {draw, rectangle,
+            minimum height=1cm,
+            minimum width=1.5cm},
+        input/.style = {coordinate,node distance=1cm},
+        output/.style = {coordinate,node distance=4cm},
+        arrow/.style={draw, -latex,node distance=2cm},
+        pinstyle/.style = {pin edge={latex-, black,node distance=2cm}},
+        sum/.style = {draw, circle, node distance=1cm},
+    }
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\newenvironment{question}[2][Q]
+    { \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1#2} \\}
+    {  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{solution}
+    {\textit{Solution:}}
+    {}
+
+\renewcommand{\qed}{\quad\qedsymbol}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%Header-Make sure you update this information!!!!
+\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\large\textbf{William Alexaindre} \hfill \textbf{Final Exam}   \\
+UnityID: wjperezl \hfill ID: 200 672 569 \\
+\normalsize Course: ISE 754 - Logistics Engineering \hfill Term: Fall 2025\\
+Instructor: Leila Hajibabai \hfill Due Date: $21^{st}$ November, 2025 \\
+\noindent\rule{7in}{2.8pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% question 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{question}{1}
+Consider the scalar system
+\begin{align*}
+    \Dot{x} &= -x + u + w
+\end{align*}
+$w$ is zero-mean process noise with a variance of $Q$. The control has a mean value of $u_0$, an uncertainty of $2$ (one standard deviation), and is uncorrelated with $w$. Rewrite the system equations to obtain an equivalent system with a normalized control that is perfectly known. What is the variance of the new process noise term in the transformed system equation?
+\end{question}
+\begin{solution}
+The variance of the new process noise, $w_u$ is $\Sigma_{w_{u}} = Q + \sigma^2_u = Q + 4$.
+\begin{align*}
+    \Dot{x} &= -x + u_0 + \underbrace{w + \Delta u}_{w_{u}}, \quad w_u \sim (0, Q + \sigma^2_u).
+\end{align*}
+\end{solution}
+\noindent\rule{7in}{2.8pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% question 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{question}{2}
+Consider the system
+\begin{align*}
+    x_{k+1} &= \phi x_{k} + w_{k}, \\
+    y_k &= x_k,
+\end{align*}
+where $w_k \sim (0, 1)$, and $\phi = 0.9$ is an unknown constant. Design an extended Kalman filter to estimate $\phi$. Simulate the filter for $100$ time steps with $x_0 = 1, P_0 = I , \hat{x}_{0} = 0$, and $\hat{\phi}_{0} = 0$. Hand in your source code and a plot showing $\hat{\phi}$ as a function of time.
+\end{question}
+\begin{solution}
+Perform the measurement update of the state estimate and estimation error covariance as follows
+\begin{align*}
+    K_k &= P^{-}_k H^{\top}_k (H_k P^{-}_k H^{\top}_k + R_k)^{-1} = P^{-}_k H^{\top}_k (H_k P^{-}_k H^{\top}_k)^{-1}, \quad \text{Since }R_k = 0, \\
+    \hat{\bar{x}}^{+}_{k} &= \hat{\bar{x}}^{-}_{k} + K_k (y_k - h_k(\hat{\bar{x}}^{-}_{k}, 0)) \\
+    &= \hat{\bar{x}}^{-}_{k} + K_k (y_k - \hat{x}^{-}_{k}), \quad \text{Since } \hat{\phi}^{-}_{k} = 0, \\
+    P^{+}_k &= (I - K_k H_k) P^{-}_k
+\end{align*}
+
+\end{solution}
+\noindent\rule{7in}{2.8pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+\begin{question}{5}
+For our problem we have $L=1500 \text{ Du}$, Travel costs of $3$ Mu/Du and cargo transportation needs per time unit as shown below: 
+
+$$\delta(d)=\begin{cases}
+    5,& \text{if } 0\leq d \leq 500\\
+    1,& \text{if } 500< d < 1000\\
+    5,& \text{if } 1000\leq d \leq 1500
+\end{cases}$$
+\end{question}
+
+\begin{solution}
+    $$CummulativeDemand(d) = CD(d) = \begin{cases}
+    5d,& \text{if } 0\leq d \leq 500\\
+    2500 + (d-500),& \text{if } 500< d < 1000\\
+    3000 + 5(d-1000),& \text{if } 1000\leq d \leq 1500
+    \end{cases}$$
+
+
+    \begin{itemize}[leftmargin=1.3cm]
+        \item[A.] The approach that I will use for this part is solve use the integrals in the formulation to get the answer.
+        \begin{enumerate}
+            \item For this case, the optimal location is given by:
+            $$\displaystyle d^* = \frac{\int_{a}^{b} CD(x) \mathrm{d}x + CD(a)\cdot a - CD(b)\cdot b }{CD(a)-CD(b)}$$ which is obtained by setting the areas on both sides of the $d^*$ equal to each other. For our particular problem:
+
+            $$\displaystyle d^* = \frac{\int_{0}^{1500} CD(x) \mathrm{d}x + CD(0)\cdot 0 - CD(1500)\cdot 1500 }{CD(0)-CD(1500)}$$
+            $${\displaystyle d^* = \frac{4,125,000+0 - 8,250,000}{0-5500} = 750}$$ 
+            $$\boxed{\displaystyle d^* = 750}$$ The best location for the terminal ($n=1$) is at $750$ Du.
+            \item 
+        \end{enumerate}
+
+
+
+    \end{itemize}
+\end{solution}
+
+
+
+\end{document}
