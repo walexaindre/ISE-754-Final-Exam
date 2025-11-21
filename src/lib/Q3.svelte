@@ -201,38 +201,53 @@
             }}
             class="tab {tab == 2 ? 'tab-active' : ''}">2 Opt - NI</button
         >
+
+        <button
+            role="tab"
+            onclick={() => {
+                tab = 3;
+            }}
+            class="tab {tab == 3 ? 'tab-active' : ''}">3 Opt - NN</button
+        >
+        <button
+            role="tab"
+            onclick={() => {
+                tab = 4;
+            }}
+            class="tab {tab == 4 ? 'tab-active' : ''}">3 Opt - NI</button
+        >
     </div>
 </div>
-
-{#if tab == 0}<div class="flex justify-center">
-        <table class="table w-fit mb-4">
-            <thead>
-                <tr>
-                    <th
-                        colspan="2"
-                        class="text-center font-bold text-lg text-primary"
-                    >
-                        Parameters
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Starting Node:</td>
-                    <td>
-                        <label class="input w-32">
-                            <input
-                                type="number"
-                                placeholder="Start Node"
-                                class=""
-                                bind:value={startNode}
-                            />
-                        </label>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="flex justify-center">
+    <table class="table w-fit mb-4">
+        <thead>
+            <tr>
+                <th
+                    colspan="2"
+                    class="text-center font-bold text-lg text-primary"
+                >
+                    Parameters
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Starting Node:</td>
+                <td>
+                    <label class="input w-32">
+                        <input
+                            type="number"
+                            placeholder="Start Node"
+                            class=""
+                            bind:value={startNode}
+                        />
+                    </label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{#if tab == 0}
     <div class=" flex justify-center">
         <table class="table w-fit">
             <thead>
@@ -343,5 +358,238 @@
         </div>
     </div>
 {:else if tab == 1}
-    aa
+    <div class=" flex justify-center">
+        <div>
+            {@html plotTour(NN2Opt.route).outerHTML}
+        </div>
+        <div>
+            <table class="table border border-base-content/5 w-fit ml-4">
+                <thead>
+                    <tr>
+                        <th
+                            colspan="6"
+                            class="text-center font-bold text-lg text-primary"
+                        >
+                            Nearest Neighbor + 2 Opt
+                        </th>
+                    </tr>
+                    <tr>
+                        <th> i </th>
+                        <th> j </th>
+                        <th> Feasible </th>
+                        <th> Current Distance</th>
+                        <th> New Distance</th>
+                        <th> Delta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {#each NN2Opt.history.filter((v) => v.feasible) as hist}
+                        <tr class={hist.feasible ? "bg-accent" : ""}>
+                            <td> {hist.i} </td>
+                            <td> {hist.j} </td>
+                            <td>
+                                {hist.feasible ? "Yes" : "No"}
+                            </td>
+                            <td>
+                                {hist.currentDistance.toLocaleString("en", {
+                                    useGrouping: true,
+                                })}
+                            </td>
+                            <td>
+                                {hist.newDistance.toLocaleString("en", {
+                                    useGrouping: true,
+                                })}
+                            </td>
+                            <td>
+                                {hist.delta.toLocaleString("en", {
+                                    useGrouping: true,
+                                })}
+                            </td>
+                            <td>
+                                {hist.route.join("-")}
+                            </td>
+                        </tr>
+                    {/each}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{:else if tab == 2}
+    <div class=" flex justify-center">
+        <div>
+            {@html plotTour(NI2Opt.route).outerHTML}
+        </div>
+        <div>
+            <table class="table border border-base-content/5 w-fit ml-4">
+                <thead>
+                    <tr>
+                        <th
+                            colspan="6"
+                            class="text-center font-bold text-lg text-primary"
+                        >
+                            Nearest Insertion + 2 Opt
+                        </th>
+                    </tr>
+                    <tr>
+                        <th> i </th>
+                        <th> j </th>
+                        <th> Feasible </th>
+                        <th> Current Distance</th>
+                        <th> New Distance</th>
+                        <th> Delta</th>
+                        <th> Route</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {#each NI2Opt.history.filter((v) => v.feasible) as hist}
+                        <tr class={hist.feasible ? "bg-accent" : ""}>
+                            <td> {hist.i} </td>
+                            <td> {hist.j} </td>
+                            <td>
+                                {hist.feasible ? "Yes" : "No"}
+                            </td>
+                            <td>
+                                {hist.currentDistance.toLocaleString("en", {
+                                    useGrouping: true,
+                                })}
+                            </td>
+                            <td>
+                                {hist.newDistance.toLocaleString("en", {
+                                    useGrouping: true,
+                                })}
+                            </td>
+                            <td>
+                                {hist.delta.toLocaleString("en", {
+                                    useGrouping: true,
+                                })}
+                            </td>
+                            <td>
+                                {hist.route.join("-")}
+                            </td>
+                        </tr>
+                    {/each}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{:else if tab == 3}
+    <div class=" flex justify-center">
+        <div>
+            {@html plotTour(NN3Opt.route).outerHTML}
+        </div>
+        <div>
+            <table class="table border border-base-content/5 w-fit ml-4">
+                <thead>
+                    <tr>
+                        <th
+                            colspan="6"
+                            class="text-center font-bold text-lg text-primary"
+                        >
+                            Nearest Neighbor + 3 Opt
+                        </th>
+                    </tr>
+                    <tr>
+                        <th> i </th>
+                        <th> j </th>
+                        <th> k </th>
+                        <th> Feasible </th>
+                        <th> Current Distance</th>
+                        <th> New Distance</th>
+                        <th> Delta</th>
+                        <th> Route</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {#each NN3Opt.history.filter((v) => v.feasible) as hist}
+                        <tr class={hist.feasible ? "bg-accent" : ""}>
+                            <td> {hist.i} </td>
+                            <td> {hist.j} </td>
+                            <td> {hist.k} </td>
+                            <td>
+                                {hist.feasible ? "Yes" : "No"}
+                            </td>
+                            <td>
+                                {hist.currentDistance.toLocaleString("en", {
+                                    useGrouping: true,
+                                })}
+                            </td>
+                            <td>
+                                {hist.newDistance.toLocaleString("en", {
+                                    useGrouping: true,
+                                })}
+                            </td>
+                            <td>
+                                {hist.delta.toLocaleString("en", {
+                                    useGrouping: true,
+                                })}
+                            </td>
+                            <td>
+                                {hist.route.join("-")}
+                            </td>
+                        </tr>
+                    {/each}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{:else if tab == 4}
+    <div class=" flex justify-center">
+        <div>
+            {@html plotTour(NI3Opt.route).outerHTML}
+        </div>
+        <div>
+            <table class="table border border-base-content/5 w-fit ml-4">
+                <thead>
+                    <tr>
+                        <th
+                            colspan="6"
+                            class="text-center font-bold text-lg text-primary"
+                        >
+                            Nearest Insertion + 3 Opt
+                        </th>
+                    </tr>
+                    <tr>
+                        <th> i </th>
+                        <th> j </th>
+                        <th> k </th>
+                        <th> Feasible </th>
+                        <th> Current Distance</th>
+                        <th> New Distance</th>
+                        <th> Delta</th>
+                        <th> Route</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {#each NI3Opt.history.filter((v) => v.feasible) as hist}
+                        <tr class={hist.feasible ? "bg-accent" : ""}>
+                            <td> {hist.i} </td>
+                            <td> {hist.j} </td>
+                            <td> {hist.k} </td>
+                            <td>
+                                {hist.feasible ? "Yes" : "No"}
+                            </td>
+                            <td>
+                                {hist.currentDistance.toLocaleString("en", {
+                                    useGrouping: true,
+                                })}
+                            </td>
+                            <td>
+                                {hist.newDistance.toLocaleString("en", {
+                                    useGrouping: true,
+                                })}
+                            </td>
+                            <td>
+                                {hist.delta.toLocaleString("en", {
+                                    useGrouping: true,
+                                })}
+                            </td>
+                            <td>
+                                {hist.route.join("-")}
+                            </td>
+                        </tr>
+                    {/each}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {/if}

@@ -17,11 +17,13 @@
     let p: number = $state(0);
 
     let opta: number = $state(0);
-    let optb: number = $state(0);
-    let optn: number = $state(0);
+    let optb: number = $state(1500);
+    let optn: number = $state(3);
 
     //<button class="btn btn-active" onclick={plt}> Plt </button>
     //<div id="plot" style="width: 600px; height: 400px;"></div>
+
+    let tab: number = $state(0);
 </script>
 
 <div class="border rounded-box border-base-content/5">
@@ -32,7 +34,7 @@
                     colspan="3"
                     class="text-center font-bold text-lg text-primary"
                 >
-                    Toolkit
+                    Calculator
                 </th>
             </tr>
             <tr>

@@ -4,6 +4,7 @@
   import Q2 from "./lib/Q2.svelte";
   import Q4 from "./lib/Q4.svelte";
   import Q5 from "./lib/Q5.svelte";
+  import Q6 from "./lib/Q6.svelte";
   let activeQuestion: number = $state(3);
   let totalQuestions: number = 6;
 
@@ -29,7 +30,7 @@
 </div>
 <div class="grid justify-center">
   {#if activeQuestion === 1}
-    <p>Question 1 content goes here.</p>
+    <Q1 />
   {:else if activeQuestion === 2}
     <Q2 />
   {:else if activeQuestion === 3}
@@ -38,5 +39,7 @@
     <Q4 />
   {:else if activeQuestion === 5}
     <Q5 />
+  {:else if activeQuestion === 6}
+    <Q6 />
   {/if}
 </div>

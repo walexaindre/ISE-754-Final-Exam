@@ -1,10 +1,10 @@
 import { TotalDistance } from "./q2";
 import { permutations } from "../foundation/permutation";
 
-export function Opt2Exchange(route: Array<number>, dstMatrix: Array<Array<number>>, iterations: number): { route: Array<number>, history: { i: number; j: number, feasible: boolean, currentDistance: number, newDistance: number }[] } {
+function Opt2ExchangeBase(route: Array<number>, dstMatrix: Array<Array<number>>, iterations: number = 1): { route: Array<number>, history: { i: number; j: number, feasible: boolean, currentDistance: number, newDistance: number, delta: number, route: Array<number> }[] } {
     const n = route.length;
     let countSwaps = 0;
-    const Attempts: { i: number; j: number, feasible: boolean, currentDistance: number, newDistance: number }[] = [];
+    const Attempts: { i: number; j: number, feasible: boolean, currentDistance: number, newDistance: number, delta: number, route: number[] }[] = [];
 
     let newRoute = route.slice();
 
@@ -18,9 +18,9 @@ export function Opt2Exchange(route: Array<number>, dstMatrix: Array<Array<number
         if (newDistance < currentDistance) {
             countSwaps++;
             route = newRoute.slice();
-            Attempts.push({ i: i + 1, j: j + 1, feasible: true, currentDistance, newDistance });
+            Attempts.push({ i: route[i], j: route[j], feasible: true, currentDistance, newDistance, delta: currentDistance - newDistance, route: route.slice() });
         } else {
-            Attempts.push({ i: i + 1, j: j + 1, feasible: false, currentDistance, newDistance });
+            Attempts.push({ i: route[i], j: route[j], feasible: false, currentDistance, newDistance, delta: currentDistance - newDistance, route: route.slice() });
             [newRoute[i], newRoute[j]] = [newRoute[j], newRoute[i]];
             newRoute[n - 1] = newRoute[0];
         }
@@ -30,17 +30,34 @@ export function Opt2Exchange(route: Array<number>, dstMatrix: Array<Array<number
         }
 
     }
-    console.log("2-Opt swaps performed:", countSwaps);
-    console.log("2-Opt final route distance:", TotalDistance(route, dstMatrix));
-    console.log("Attempts:", Attempts.length);
 
     return { route, history: Attempts };
 }
 
-export function Opt3Exchange(route: Array<number>, dstMatrix: Array<Array<number>>, iterations: number): { route: Array<number>, history: { i: number; j: number; k: number; feasible: boolean; currentDistance: number; newDistance: number }[] } {
+export function Opt2Exchange(route: Array<number>, dstMatrix: Array<Array<number>>, iterations: number): { route: Array<number>, history: { i: number; j: number, feasible: boolean, currentDistance: number, newDistance: number, delta: number, route: Array<number> }[] } {
+    const Attempts: { i: number; j: number, feasible: boolean, currentDistance: number, newDistance: number, delta: number, route: number[] }[] = [];
+    for (let iter = 0; iter < iterations; iter++) {
+        const result = Opt2ExchangeBase(route, dstMatrix, 1);
+        route = result.route;
+        Attempts.push(...result.history);
+    }
+    return { route, history: Attempts };
+}
+
+
+export function Opt3Exchange(route: Array<number>, dstMatrix: Array<Array<number>>, iterations: number): { route: Array<number>, history: { i: number; j: number; k: number; feasible: boolean; currentDistance: number; newDistance: number, delta: number, route: Array<number> }[] } {
+    const Attempts: { i: number; j: number; k: number; feasible: boolean; currentDistance: number; newDistance: number, delta: number, route: Array<number> }[] = [];
+    for (let iter = 0; iter < iterations; iter++) {
+        const result = Opt3ExchangeBase(route, dstMatrix, 1);
+        route = result.route;
+        Attempts.push(...result.history);
+    }
+    return { route, history: Attempts };
+}
+function Opt3ExchangeBase(route: Array<number>, dstMatrix: Array<Array<number>>, iterations: number = 1): { route: Array<number>, history: { i: number; j: number; k: number; feasible: boolean; currentDistance: number; newDistance: number, delta: number, route: Array<number> }[] } {
     const n = route.length;
     let countSwaps = 0;
-    const Attempts: { i: number; j: number; k: number; feasible: boolean; currentDistance: number; newDistance: number }[] = [];
+    const Attempts: { i: number; j: number; k: number; feasible: boolean; currentDistance: number; newDistance: number; delta: number, route: number[] }[] = [];
 
     let newRoute = route.slice();
 
@@ -55,9 +72,9 @@ export function Opt3Exchange(route: Array<number>, dstMatrix: Array<Array<number
         if (newDistance < currentDistance) {
             countSwaps++;
             route = newRoute.slice();
-            Attempts.push({ i: i + 1, j: j + 1, k: k + 1, feasible: true, currentDistance, newDistance });
+            Attempts.push({ i: route[i], j: route[j], k: route[k], feasible: true, currentDistance, newDistance, delta: currentDistance - newDistance, route: route.slice() });
         } else {
-            Attempts.push({ i: i + 1, j: j + 1, k: k + 1, feasible: false, currentDistance, newDistance });
+            Attempts.push({ i: route[i], j: route[j], k: route[k], feasible: false, currentDistance, newDistance, delta: currentDistance - newDistance, route: route.slice() });
             [newRoute[i], newRoute[j], newRoute[k]] = [newRoute[j], newRoute[k], newRoute[i]];
             newRoute[n - 1] = newRoute[0];
         }
@@ -68,8 +85,6 @@ export function Opt3Exchange(route: Array<number>, dstMatrix: Array<Array<number
 
 
     }
-    console.log("3-Opt swaps performed:", countSwaps);
-    console.log("3-Opt final route distance:", TotalDistance(route, dstMatrix));
-    console.log("Attempts:", Attempts.length);
+
     return { route, history: Attempts };
 }

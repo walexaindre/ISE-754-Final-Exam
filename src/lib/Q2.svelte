@@ -375,8 +375,38 @@
                                 { useGrouping: true },
                             )}
                         </td>
-                    </tr></tbody
-                >
+                    </tr>
+                </tbody>
+            </table>
+            <table
+                class="table table-md w-full mt-4 border-2 border-base-content/5"
+            >
+                <tbody
+                    ><tr>
+                        <td class="font-bold"> Z<sup>NN</sup>/z* </td>
+                        <td class="text-center">
+                            {TotalDistance(NNeighbor, FloydW) / 685}
+                        </td><td></td>
+                        <td class="font-bold"> 0.5([log<sub>2</sub> n] +1)</td>
+
+                        <td class="text-center">
+                            {(
+                                0.5 *
+                                (Math.ceil(Math.log2(nodes.length)) + 1)
+                            ).toLocaleString("en", { useGrouping: true })}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="font-bold"> Z<sup>NI</sup>/z* </td>
+                        <td class="text-center">
+                            {TotalDistance(NInsertion, FloydW) / 685}
+                        </td><td></td>
+                        <td class="font-bold"> 2</td>
+
+                        <td class="text-center"> 2 </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
         <div>
