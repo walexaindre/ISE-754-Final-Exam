@@ -1,3 +1,5 @@
+import { GradientDescent2D } from "../foundation/gradientDescent.js";
+
 const Params = {
     transportationCostPerUnitDistance: 3,
 }
@@ -50,7 +52,7 @@ function AccessCost(a: number, b: number, points: Array<number>): number {
 }
 
 
-function OptimalLocation(a: number, b: number, n: number): Array<number> {
+export function OptimalLocation(a: number, b: number, n: number): Array<number> {
     if (n == 1) {
         const inte = IntegralCummulativeDemand(a, b)
         const fba = CummulativeDemand(a) - CummulativeDemand(b)
@@ -58,10 +60,40 @@ function OptimalLocation(a: number, b: number, n: number): Array<number> {
         return [(inte + weight) / fba]
     }
 
-    if (n > 1) {
-        let bestPoints: Array<number> = []
+    if (n == 2) {
+        const Objective = (c: number): number => {
+            return IntegralCummulativeDemand(c, b) / (b - c) - IntegralCummulativeDemand(a, c) / (c - a) - CummulativeDemand(c) + CummulativeDemand(a);
+        }
+        let left = a
+        let right = b
+        let mid = (left + right) / 2
+        let cval = Objective(mid)
+        while (Math.abs(cval) > 1e-5) {
+            if (cval < 0) {
+                right = mid
+            } else {
+                left = mid
+            }
+            mid = (left + right) / 2
+            cval = Objective(mid)
+        }
+        return [OptimalLocation(a, mid, 1)[0], OptimalLocation(mid, b, 1)[0]]
     }
 
+    if (n == 3) {
+        const F = (c1: number, c2: number): number => {
+            return IntegralCummulativeDemand(a, c1) / (c1 - a) - IntegralCummulativeDemand(c2, b) / (b - c2) - CummulativeDemand(a) + CummulativeDemand(c2);
+        }
+
+        const mid = (a + b) / 2.2;
+
+        let c1 = OptimalLocation(a, mid, 1)[0];
+        let c2 = OptimalLocation(mid, b, 1)[0];
+
+        [c1, c2] = GradientDescent2D(c1, c2, F, 1e-7);
+
+        return [OptimalLocation(a, c1, 1)[0], OptimalLocation(c1, c2, 1)[0], OptimalLocation(c2, b, 1)[0]];
+    }
 
     return []
 }

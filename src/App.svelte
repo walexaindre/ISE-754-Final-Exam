@@ -1,15 +1,30 @@
 <script lang="ts">
+  import Q4 from "./lib/Q4.svelte";
   import Q5 from "./lib/Q5.svelte";
+  let activeQuestion: number = $state(4);
+  let totalQuestions: number = 6;
+
+  function setActiveQuestion(q: number) {
+    activeQuestion = q;
+  }
 </script>
 
 <div class="grid justify-center">
   <div role="tablist" class="tabs tabs-lift">
-    <button role="tab" class="tab">Q1</button>
-    <button role="tab" class="tab">Q2</button>
-    <button role="tab" class="tab">Q3</button>
-    <button role="tab" class="tab tab-active">Q4</button>
-    <button role="tab" class="tab">Q5</button>
-    <button role="tab" class="tab">Q6</button>
+    {#each Array(totalQuestions) as _, index}
+      <button
+        role="tab"
+        class="tab {activeQuestion === index + 1 ? 'tab-active' : ''}"
+        onclick={() => setActiveQuestion(index + 1)}
+      >
+        Q{index + 1}
+      </button>
+    {/each}
   </div>
-  <Q5 />
+  {#if activeQuestion === 4}
+    <Q4 />
+  {/if}
+  {#if activeQuestion === 5}
+    <Q5 />
+  {/if}
 </div>

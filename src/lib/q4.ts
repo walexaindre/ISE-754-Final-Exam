@@ -1,17 +1,24 @@
-interface Savings {
+import { NearestNeighbor } from "./q2";
+
+export interface Savings {
     i: number;
     j: number;
     saving: number
 }
 
-interface MergeAttempt {
+export interface MergeAttempt {
     i: number;
     j: number;
     feasible: boolean;
     reason?: string;
 }
 
-class VRP {
+
+
+
+
+
+export class VRP {
     Q: number // Truck capacity
     RouteNodeLimit: number // Max number of nodes in a route including depot
     Coordinates: Array<[number, number]> // Coordinates of points
@@ -39,6 +46,14 @@ class VRP {
 
     routeNodeCount(route: Array<number>): number {
         return route.length - 1
+    }
+
+    routeDemand(route: Array<number>): number {
+        let totalDemand = 0
+        for (const node of route) {
+            totalDemand += this.Demand[node]
+        }
+        return totalDemand
     }
 
     calculateTotalDistance(): number {
@@ -69,6 +84,55 @@ class VRP {
                 console.log("This should never happen!! => Merge: route not found for nodes ", saving.i, saving.j)
                 continue
             }
+            else if (routeI === routeJ) {
+                this.MergeAttempts.push({
+                    i: saving.i,
+                    j: saving.j,
+                    feasible: false,
+                    reason: "Same route"
+                })
+            } else {
+                const routeINodeCount = this.routeNodeCount(this.Routes[routeI])
+                const routeJNodeCount = this.routeNodeCount(this.Routes[routeJ])
+                const totalNodeCount = routeINodeCount + routeJNodeCount - 1
+                if (totalNodeCount > this.RouteNodeLimit) {
+                    this.MergeAttempts.push({
+                        i: saving.i,
+                        j: saving.j,
+                        feasible: false,
+                        reason: "Node limit exceeded"
+                    })
+                } else {
+                    const routeIDemand = this.routeDemand(this.Routes[routeI])
+                    const routeJDemand = this.routeDemand(this.Routes[routeJ])
+                    const totalDemand = routeIDemand + routeJDemand
+                    if (totalDemand > this.Q) {
+                        this.MergeAttempts.push({
+                            i: saving.i,
+                            j: saving.j,
+                            feasible: false,
+                            reason: "Capacity exceeded"
+                        })
+                    } else {
+                        const newRoute = this.Routes[routeI].slice(0, -1).concat(this.Routes[routeJ].slice(1))
+                        this.Routes.splice(Math.max(routeI, routeJ), 1)
+                        this.Routes.splice(Math.min(routeI, routeJ), 1)
+                        this.Routes.push(newRoute)
+                        this.MergeAttempts.push({
+                            i: saving.i,
+                            j: saving.j,
+                            feasible: true,
+                            reason: "Total demand: " + totalDemand + ", Total nodes: " + totalNodeCount
+                        })
+                    }
+                }
+            }
+        }
+    }
+
+    optimizeRoutes() {
+        for (let route of this.Routes) {
+            route = NearestNeighbor(route.map(i => this.Coordinates[i]), 0)
         }
     }
 

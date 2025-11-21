@@ -3,7 +3,9 @@
         CummulativeDemand,
         IntegralCummulativeDemand,
         AccessCostInterval,
+        OptimalLocation,
     } from "./q5";
+    import { formatArray } from "../foundation/format";
     import * as Plot from "@observablehq/plot";
 
     function plt() {
@@ -34,6 +36,10 @@
     let acosta: number = $state(0);
     let acostb: number = $state(0);
     let p: number = $state(0);
+
+    let opta: number = $state(0);
+    let optb: number = $state(0);
+    let optn: number = $state(0);
 
     //<button class="btn btn-active" onclick={plt}> Plt </button>
     //<div id="plot" style="width: 600px; height: 400px;"></div>
@@ -145,6 +151,43 @@
                         "en",
                         { useGrouping: true },
                     )}</td
+                >
+            </tr>
+            <tr>
+                <td>OptimalLocation(a,b,n)</td>
+                <td>
+                    <div class="join w-80">
+                        <label class="input join-item">
+                            <b>a: </b>
+                            <input
+                                type="number"
+                                placeholder="a"
+                                class=""
+                                bind:value={opta}
+                            />
+                        </label>
+                        <label class="input join-item">
+                            <b>b: </b>
+                            <input
+                                type="number"
+                                placeholder="b"
+                                class=""
+                                bind:value={optb}
+                            />
+                        </label>
+                        <label class="input join-item">
+                            <b>n: </b>
+                            <input
+                                type="number"
+                                placeholder="n"
+                                class=""
+                                bind:value={optn}
+                            />
+                        </label>
+                    </div>
+                </td>
+                <td class="text-center"
+                    >{formatArray(OptimalLocation(opta, optb, optn))}</td
                 >
             </tr>
         </tbody>
