@@ -334,4 +334,41 @@
             </tbody>
         </table>
     </div>
+{:else if tab == 3}
+    <div class=" flex justify-center">
+        <table class="table border-base-content/5 w-fit border-2 my-2">
+            <thead>
+                <tr>
+                    <th> Parameter </th>
+                    <th> Value </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center">
+                    <td class="font-bold"> c<sub>T</sub> </td>
+                    <td>120000 </td>
+                </tr>
+                <tr class="text-center">
+                    <td class="font-bold"> n<sup>*</sup> </td>
+                    <td> - </td>
+                </tr>
+                <tr class="text-center">
+                    <td class="font-bold"> z<sup>*</sup> </td>
+                    <td> - </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class=" flex justify-center">
+        <table class="table border-base-content/5">
+            <thead>
+                <tr>
+                    <th> # of Locations </th>
+                    <th> Optimal Locations </th>
+                    <th> Total Access Cost </th>
+                </tr>
+            </thead>
+            <tbody> </tbody>
+        </table>
+    </div>
 {/if}

@@ -21,5 +21,3 @@
     let costPerDayA: number = $state(0);
     let costPerDayB: number = $state(0);
 </script>
-
-a
