@@ -29,7 +29,7 @@ export function IntegralCummulativeDemandZero(b: number): number {
         return 5 * (b ** 2) / 2;
     } else if (b <= 1000) {
         return IntegralCummulativeDemandZero(500) + RectangleArea(b - 500, CummulativeDemand(500)) + ((b - 500) ** 2) / 2;
-    } else if (b <= 1500) {
+    } else if (b <= 1501) {
         return IntegralCummulativeDemandZero(1000) + RectangleArea(b - 1000, CummulativeDemand(1000)) + (5 * (b - 1000) ** 2) / 2;
     }
     return Infinity;
@@ -40,23 +40,39 @@ export function IntegralCummulativeDemand(a: number, b: number): number {
 }
 
 export function AccessCostInterval(a: number, b: number, p: number): number {
+    console.log(`AccessCostInterval a: ${a}, b: ${b}, p: ${p}`);
     const base = Params.transportationCostPerUnitDistance
     const leftSide = IntegralCummulativeDemand(a, p) - CummulativeDemand(a) * (p - a)
     const rightSide = CummulativeDemand(b) * (b - p) - IntegralCummulativeDemand(p, b)
     return base * (leftSide + rightSide)
 }
 
-function AccessCost(a: number, b: number, points: Array<number>): number {
+export function TotalAccessCost(a: number, b: number, n: number): number {
+    const Boundary: Array<number> = [];
+    const locations = OptimalLocation(a, b, n, Boundary);
+    let totalCost = 0;
 
-    return 1;
+    console.log("Boundaries: ", Boundary);
+
+    for (let i = 0; i < Boundary.length - 1; i++) {
+        const left = Boundary[i];
+        const right = Boundary[i + 1];
+        const loc = locations[i];
+        totalCost += AccessCostInterval(left, right, loc);
+    }
+
+    return totalCost;
 }
 
 
-export function OptimalLocation(a: number, b: number, n: number): Array<number> {
+export function OptimalLocation(a: number, b: number, n: number, Boundary: Array<number> | null = null): Array<number> {
     if (n == 1) {
         const inte = IntegralCummulativeDemand(a, b)
         const fba = CummulativeDemand(a) - CummulativeDemand(b)
         const weight = CummulativeDemand(a) * a - CummulativeDemand(b) * b
+        if (Boundary) {
+            Boundary.push(a, b)
+        }
         return [(inte + weight) / fba]
     }
 
@@ -77,6 +93,11 @@ export function OptimalLocation(a: number, b: number, n: number): Array<number> 
             mid = (left + right) / 2
             cval = Objective(mid)
         }
+
+        if (Boundary) {
+            Boundary.push(a, mid, b)
+        }
+
         return [OptimalLocation(a, mid, 1)[0], OptimalLocation(mid, b, 1)[0]]
     }
 
@@ -85,13 +106,17 @@ export function OptimalLocation(a: number, b: number, n: number): Array<number> 
             return IntegralCummulativeDemand(a, c1) / (c1 - a) - IntegralCummulativeDemand(c2, b) / (b - c2) - CummulativeDemand(a) + CummulativeDemand(c2);
         }
 
-        const mid = (a + b) / 2.2;
+        const mid = (a + b) / 2;
 
         let c1 = OptimalLocation(a, mid, 1)[0];
         let c2 = OptimalLocation(mid, b, 1)[0];
 
         [c1, c2] = GradientDescent2D(c1, c2, F, 1e-7);
 
+
+        if (Boundary) {
+            Boundary.push(a, c1, c2, b)
+        }
         return [OptimalLocation(a, c1, 1)[0], OptimalLocation(c1, c2, 1)[0], OptimalLocation(c2, b, 1)[0]];
     }
 
