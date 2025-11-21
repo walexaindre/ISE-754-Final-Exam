@@ -1,3 +1,6 @@
+import NetworkData from "../assets/q2arcs.json";
+import NodeData from "../assets/q2node.json";
+
 function euclideanDistance(A: [number, number], B: [number, number]): number {
     return Math.sqrt(
         (A[0] - B[0]) ** 2 +
@@ -33,3 +36,23 @@ export function NearestNeighbor(locations: Array<[number, number]>, startIndex: 
     }
     return route
 }
+
+
+export interface NetworkLink {
+    init_node: number,
+    term_node: number,
+    capacity: number,
+    length: number,
+    free_flow_time: number,
+    b: number,
+    power: number,
+    speed: number,
+    toll: number,
+    link_type: number
+}
+
+
+export function LinkTravelTime(lnk: NetworkLink): number {
+    return lnk.free_flow_time * (1 + lnk.b * (lnk.speed / lnk.capacity) ** lnk.power)
+}
+
