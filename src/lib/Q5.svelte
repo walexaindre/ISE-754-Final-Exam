@@ -26,7 +26,11 @@
 
     let tab: number = $state(0);
 
-    let locationSet: Array<number> = $state([]);
+    let locationSet: Array<number> = $state([
+        103, 179, 258, 272, 294, 321, 326, 331, 343, 377, 436, 455, 622, 649,
+        670, 694, 696, 707, 839, 842, 872, 894, 994, 1044, 1080, 1085, 1153,
+        1289, 1382, 1451,
+    ]);
 </script>
 
 <div class="flex justify-center">
