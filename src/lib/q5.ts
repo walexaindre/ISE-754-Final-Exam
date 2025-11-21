@@ -1,5 +1,8 @@
 import { GradientDescent2D } from "../foundation/gradientDescent.js";
 
+import { permutations } from "../foundation/permutation";
+
+
 const Params = {
     transportationCostPerUnitDistance: 3,
 }
@@ -40,7 +43,7 @@ export function IntegralCummulativeDemand(a: number, b: number): number {
 }
 
 export function AccessCostInterval(a: number, b: number, p: number): number {
-    console.log(`AccessCostInterval a: ${a}, b: ${b}, p: ${p}`);
+    //console.log(`AccessCostInterval a: ${a}, b: ${b}, p: ${p}`);
     const base = Params.transportationCostPerUnitDistance
     const leftSide = IntegralCummulativeDemand(a, p) - CummulativeDemand(a) * (p - a)
     const rightSide = CummulativeDemand(b) * (b - p) - IntegralCummulativeDemand(p, b)
@@ -52,7 +55,6 @@ export function TotalAccessCost(a: number, b: number, n: number): number {
     const locations = OptimalLocation(a, b, n, Boundary);
     let totalCost = 0;
 
-    console.log("Boundaries: ", Boundary);
 
     for (let i = 0; i < Boundary.length - 1; i++) {
         const left = Boundary[i];
@@ -62,6 +64,64 @@ export function TotalAccessCost(a: number, b: number, n: number): number {
     }
 
     return totalCost;
+}
+
+export function TotalAccessCostForLocations(a: number, b: number, n: number, locations: Array<number>) {
+    const sortedLocations = locations.slice().sort((x, y) => x - y);
+
+    const Results: Array<{ locations: Array<number>, cost: number, left: number, right: number, delta: number, percentage: number, optimalCost: number }> = [];
+
+    if (n == 1) {
+        const optimalCost = TotalAccessCost(a, b, 1);
+
+        for (let i = 0; i < sortedLocations.length - 1; i++) {
+
+            const cost = AccessCostInterval(a, b, sortedLocations[i]);
+            const delta = cost - optimalCost;
+            const percentage = (delta / optimalCost) * 100;
+            Results.push({ locations: [sortedLocations[i]], cost, left: a, right: b, delta, percentage, optimalCost });
+        }
+    }
+    else if (n == 2) {
+        const optimalCost = TotalAccessCost(a, b, 2);
+
+        for (let i = 0; i < sortedLocations.length - 1; i++) {
+            for (let j = i + 1; j < sortedLocations.length; j++) {
+                const left = sortedLocations[i];
+                const right = sortedLocations[j];
+                const mid = OptimalLocation(left, right, 1)[0];
+
+                const cost = AccessCostInterval(a, mid, sortedLocations[i]) + AccessCostInterval(mid, b, sortedLocations[j]);
+                const delta = cost - optimalCost;
+                const percentage = (delta / optimalCost) * 100;
+                Results.push({ locations: [sortedLocations[i], sortedLocations[j]], cost, left, right, delta, percentage, optimalCost });
+            }
+        }
+    } else if (n == 3) {
+        const optimalCost = TotalAccessCost(a, b, 3);
+        for (let i = 0; i < sortedLocations.length - 2; i++) {
+            for (let j = i + 1; j < sortedLocations.length - 1; j++) {
+                for (let k = j + 1; k < sortedLocations.length; k++) {
+                    const left = sortedLocations[i];
+                    const mid = sortedLocations[j];
+                    const right = sortedLocations[k];
+
+                    const optimalMidLeft = OptimalLocation(left, mid, 1)[0];
+                    const optimalMidRight = OptimalLocation(mid, right, 1)[0];
+
+
+                    const cost = AccessCostInterval(a, optimalMidLeft, sortedLocations[i]) +
+                        AccessCostInterval(optimalMidLeft, optimalMidRight, sortedLocations[j]) +
+                        AccessCostInterval(optimalMidRight, b, sortedLocations[k]);
+                    const delta = cost - optimalCost;
+                    const percentage = (delta / optimalCost) * 100;
+                    Results.push({ locations: [sortedLocations[i], sortedLocations[j], sortedLocations[k]], cost, left, right, delta, percentage, optimalCost });
+                }
+            }
+        }
+    }
+
+    return Results;
 }
 
 

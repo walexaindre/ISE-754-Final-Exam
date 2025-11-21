@@ -5,6 +5,7 @@
         AccessCostInterval,
         OptimalLocation,
         TotalAccessCost,
+        TotalAccessCostForLocations,
     } from "./q5";
     import { formatArray } from "../foundation/format";
     import * as Plot from "@observablehq/plot";
@@ -31,6 +32,38 @@
         670, 694, 696, 707, 839, 842, 872, 894, 994, 1044, 1080, 1085, 1153,
         1289, 1382, 1451,
     ]);
+
+    let localAccessCost1 = $derived(
+        TotalAccessCostForLocations(0, 1500, 1, locationSet),
+    );
+
+    // Calculate the location with minimum cost
+
+    let minCost1 = $derived(
+        localAccessCost1.reduce((min, item) =>
+            item.cost < min.cost ? item : min,
+        ),
+    );
+
+    let localAccessCost2 = $derived(
+        TotalAccessCostForLocations(0, 1500, 2, locationSet),
+    );
+
+    let minCost2 = $derived(
+        localAccessCost2.reduce((min, item) =>
+            item.cost < min.cost ? item : min,
+        ),
+    );
+
+    let localAccessCost3 = $derived(
+        TotalAccessCostForLocations(0, 1500, 3, locationSet),
+    );
+
+    let minCost3 = $derived(
+        localAccessCost3.reduce((min, item) =>
+            item.cost < min.cost ? item : min,
+        ),
+    );
 </script>
 
 <div class="flex justify-center">
@@ -265,6 +298,39 @@
                         })}</td
                     >
                 </tr>
+            </tbody>
+        </table>
+    </div>
+{:else if tab == 2}
+    <div class=" flex justify-center">
+        <table class="table border-base-content/5">
+            <thead>
+                <tr>
+                    <th> Location </th>
+                    <th> Total Access Cost </th>
+                    <th> Optimal Access Cost</th>
+                    <th> Delta </th>
+                    <th> Percentage </th>
+                </tr>
+            </thead>
+            <tbody>
+                {#each [minCost1, minCost2, minCost3] as cost, index}
+                    <tr>
+                        <td>
+                            {cost.locations}
+                        </td>
+                        <td>
+                            {cost.cost.toFixed(2)}
+                        </td>
+                        <td>
+                            {cost.optimalCost.toFixed(2)}
+                        </td>
+                        <td>
+                            {cost.delta}
+                        </td>
+                        <td> {cost.percentage.toFixed(2)}% </td>
+                    </tr>
+                {/each}
             </tbody>
         </table>
     </div>
