@@ -9,11 +9,20 @@ export interface Savings {
 export interface MergeAttempt {
     i: number;
     j: number;
+    saving?: number;
+    routeI?: Array<number>;
+    routeJ?: Array<number>;
     feasible: boolean;
     reason?: string;
 }
 
-
+export function ExplainMergeAttempt(attempt: MergeAttempt): string {
+    if (attempt.feasible) {
+        return `Merged nodes ${attempt.i} and ${attempt.j} successfully. ${attempt.reason}`;
+    } else {
+        return `Could not merge nodes ${attempt.i} and ${attempt.j}. Reason: ${attempt.reason}`;
+    }
+}
 
 
 
@@ -56,6 +65,22 @@ export class VRP {
         return totalDemand
     }
 
+    calculateDistance(route: Array<number>): number {
+        let distance = 0
+        for (let i = 0; i < route.length - 1; i++) {
+            distance += this.DistanceMatrix[route[i]][route[i + 1]]
+        }
+        return distance
+    }
+
+    calculateRouteDemand(route: Array<number>): number {
+        let totalDemand = 0
+        for (const node of route) {
+            totalDemand += this.Demand[node]
+        }
+        return totalDemand
+    }
+
     calculateTotalDistance(): number {
         let totalDistance = 0
         for (const route of this.Routes) {
@@ -88,7 +113,10 @@ export class VRP {
                 this.MergeAttempts.push({
                     i: saving.i,
                     j: saving.j,
+                    saving: saving.saving,
                     feasible: false,
+                    routeI: this.Routes[routeI],
+                    routeJ: this.Routes[routeJ],
                     reason: "Same route"
                 })
             } else {
@@ -99,6 +127,9 @@ export class VRP {
                     this.MergeAttempts.push({
                         i: saving.i,
                         j: saving.j,
+                        saving: saving.saving,
+                        routeI: this.Routes[routeI],
+                        routeJ: this.Routes[routeJ],
                         feasible: false,
                         reason: "Node limit exceeded"
                     })
@@ -110,20 +141,27 @@ export class VRP {
                         this.MergeAttempts.push({
                             i: saving.i,
                             j: saving.j,
+                            saving: saving.saving,
+                            routeI: this.Routes[routeI],
+                            routeJ: this.Routes[routeJ],
                             feasible: false,
                             reason: "Capacity exceeded"
                         })
                     } else {
                         const newRoute = this.Routes[routeI].slice(0, -1).concat(this.Routes[routeJ].slice(1))
-                        this.Routes.splice(Math.max(routeI, routeJ), 1)
-                        this.Routes.splice(Math.min(routeI, routeJ), 1)
-                        this.Routes.push(newRoute)
                         this.MergeAttempts.push({
                             i: saving.i,
                             j: saving.j,
+                            saving: saving.saving,
+                            routeI: this.Routes[routeI],
+                            routeJ: this.Routes[routeJ],
                             feasible: true,
                             reason: "Total demand: " + totalDemand + ", Total nodes: " + totalNodeCount
                         })
+                        this.Routes.splice(Math.max(routeI, routeJ), 1)
+                        this.Routes.splice(Math.min(routeI, routeJ), 1)
+                        this.Routes.push(newRoute)
+
                     }
                 }
             }
