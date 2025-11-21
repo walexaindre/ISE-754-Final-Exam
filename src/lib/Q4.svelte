@@ -216,7 +216,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="font-bold">Vehicle Capacity</td>
+                        <td class="font-bold">Truck Capacity</td>
                         <td class="text-center">300</td>
                     </tr>
                     <tr>

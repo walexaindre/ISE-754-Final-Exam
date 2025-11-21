@@ -2,913 +2,381 @@
     {
         "init_node": 1,
         "term_node": 2,
-        "capacity": 25900.20064,
-        "length": 6,
-        "free_flow_time": 6,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 1
     },
     {
         "init_node": 1,
         "term_node": 3,
-        "capacity": 23403.47319,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 2
     },
     {
         "init_node": 2,
         "term_node": 1,
-        "capacity": 25900.20064,
-        "length": 6,
-        "free_flow_time": 6,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 3
     },
     {
         "init_node": 2,
         "term_node": 6,
-        "capacity": 4958.180928,
-        "length": 5,
-        "free_flow_time": 5,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 4
     },
     {
         "init_node": 3,
         "term_node": 1,
-        "capacity": 23403.47319,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 5
     },
     {
         "init_node": 3,
         "term_node": 4,
-        "capacity": 17110.52372,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 6
     },
     {
         "init_node": 3,
         "term_node": 12,
-        "capacity": 23403.47319,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 7
     },
     {
         "init_node": 4,
         "term_node": 3,
-        "capacity": 17110.52372,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 8
     },
     {
         "init_node": 4,
         "term_node": 5,
-        "capacity": 17782.7941,
-        "length": 2,
-        "free_flow_time": 2,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 9
     },
     {
         "init_node": 4,
         "term_node": 11,
-        "capacity": 4908.82673,
-        "length": 6,
-        "free_flow_time": 6,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 10
     },
     {
         "init_node": 5,
         "term_node": 4,
-        "capacity": 17782.7941,
-        "length": 2,
-        "free_flow_time": 2,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 11
     },
     {
         "init_node": 5,
         "term_node": 6,
-        "capacity": 4947.995469,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 12
     },
     {
         "init_node": 5,
         "term_node": 9,
-        "capacity": 10000,
-        "length": 5,
-        "free_flow_time": 5,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 13
     },
     {
         "init_node": 6,
         "term_node": 2,
-        "capacity": 4958.180928,
-        "length": 5,
-        "free_flow_time": 5,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 14
     },
     {
         "init_node": 6,
         "term_node": 5,
-        "capacity": 4947.995469,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 15
     },
     {
         "init_node": 6,
         "term_node": 8,
-        "capacity": 4898.587646,
-        "length": 2,
-        "free_flow_time": 2,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 16
     },
     {
         "init_node": 7,
         "term_node": 8,
-        "capacity": 7841.81131,
-        "length": 3,
-        "free_flow_time": 3,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 17
     },
     {
         "init_node": 7,
         "term_node": 18,
-        "capacity": 23403.47319,
-        "length": 2,
-        "free_flow_time": 2,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 18
     },
     {
         "init_node": 8,
         "term_node": 6,
-        "capacity": 4898.587646,
-        "length": 2,
-        "free_flow_time": 2,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 19
     },
     {
         "init_node": 8,
         "term_node": 7,
-        "capacity": 7841.81131,
-        "length": 3,
-        "free_flow_time": 3,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 20
     },
     {
         "init_node": 8,
         "term_node": 9,
-        "capacity": 5050.193156,
-        "length": 10,
-        "free_flow_time": 10,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 21
     },
     {
         "init_node": 8,
         "term_node": 16,
-        "capacity": 5045.822583,
-        "length": 5,
-        "free_flow_time": 5,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 22
     },
     {
         "init_node": 9,
         "term_node": 5,
-        "capacity": 10000,
-        "length": 5,
-        "free_flow_time": 5,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 23
     },
     {
         "init_node": 9,
         "term_node": 8,
-        "capacity": 5050.193156,
-        "length": 10,
-        "free_flow_time": 10,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 24
     },
     {
         "init_node": 9,
         "term_node": 10,
-        "capacity": 13915.78842,
-        "length": 3,
-        "free_flow_time": 3,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 25
     },
     {
         "init_node": 10,
         "term_node": 9,
-        "capacity": 13915.78842,
-        "length": 3,
-        "free_flow_time": 3,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 26
     },
     {
         "init_node": 10,
         "term_node": 11,
-        "capacity": 10000,
-        "length": 5,
-        "free_flow_time": 5,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 27
     },
     {
         "init_node": 10,
         "term_node": 15,
-        "capacity": 13512.00155,
-        "length": 6,
-        "free_flow_time": 6,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 28
     },
     {
         "init_node": 10,
         "term_node": 16,
-        "capacity": 4854.917717,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 29
     },
     {
         "init_node": 10,
         "term_node": 17,
-        "capacity": 4993.510694,
-        "length": 8,
-        "free_flow_time": 8,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 30
     },
     {
         "init_node": 11,
         "term_node": 4,
-        "capacity": 4908.82673,
-        "length": 6,
-        "free_flow_time": 6,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 31
     },
     {
         "init_node": 11,
         "term_node": 10,
-        "capacity": 10000,
-        "length": 5,
-        "free_flow_time": 5,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 32
     },
     {
         "init_node": 11,
         "term_node": 12,
-        "capacity": 4908.82673,
-        "length": 6,
-        "free_flow_time": 6,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 33
     },
     {
         "init_node": 11,
         "term_node": 14,
-        "capacity": 4876.508287,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 34
     },
     {
         "init_node": 12,
         "term_node": 3,
-        "capacity": 23403.47319,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 35
     },
     {
         "init_node": 12,
         "term_node": 11,
-        "capacity": 4908.82673,
-        "length": 6,
-        "free_flow_time": 6,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 36
     },
     {
         "init_node": 12,
         "term_node": 13,
-        "capacity": 25900.20064,
-        "length": 3,
-        "free_flow_time": 3,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 37
     },
     {
         "init_node": 13,
         "term_node": 12,
-        "capacity": 25900.20064,
-        "length": 3,
-        "free_flow_time": 3,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 38
     },
     {
         "init_node": 13,
         "term_node": 24,
-        "capacity": 5091.256152,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 39
     },
     {
         "init_node": 14,
         "term_node": 11,
-        "capacity": 4876.508287,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 40
     },
     {
         "init_node": 14,
         "term_node": 15,
-        "capacity": 5127.526119,
-        "length": 5,
-        "free_flow_time": 5,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 41
     },
     {
         "init_node": 14,
         "term_node": 23,
-        "capacity": 4924.790605,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 42
     },
     {
         "init_node": 15,
         "term_node": 10,
-        "capacity": 13512.00155,
-        "length": 6,
-        "free_flow_time": 6,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 43
     },
     {
         "init_node": 15,
         "term_node": 14,
-        "capacity": 5127.526119,
-        "length": 5,
-        "free_flow_time": 5,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 44
     },
     {
         "init_node": 15,
         "term_node": 19,
-        "capacity": 14564.75315,
-        "length": 3,
-        "free_flow_time": 3,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 45
     },
     {
         "init_node": 15,
         "term_node": 22,
-        "capacity": 9599.180565,
-        "length": 3,
-        "free_flow_time": 3,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 46
     },
     {
         "init_node": 16,
         "term_node": 8,
-        "capacity": 5045.822583,
-        "length": 5,
-        "free_flow_time": 5,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 47
     },
     {
         "init_node": 16,
         "term_node": 10,
-        "capacity": 4854.917717,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 48
     },
     {
         "init_node": 16,
         "term_node": 17,
-        "capacity": 5229.910063,
-        "length": 2,
-        "free_flow_time": 2,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 49
     },
     {
         "init_node": 16,
         "term_node": 18,
-        "capacity": 19679.89671,
-        "length": 3,
-        "free_flow_time": 3,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 50
     },
     {
         "init_node": 17,
         "term_node": 10,
-        "capacity": 4993.510694,
-        "length": 8,
-        "free_flow_time": 8,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 51
     },
     {
         "init_node": 17,
         "term_node": 16,
-        "capacity": 5229.910063,
-        "length": 2,
-        "free_flow_time": 2,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 52
     },
     {
         "init_node": 17,
         "term_node": 19,
-        "capacity": 4823.950831,
-        "length": 2,
-        "free_flow_time": 2,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 53
     },
     {
         "init_node": 18,
         "term_node": 7,
-        "capacity": 23403.47319,
-        "length": 2,
-        "free_flow_time": 2,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 54
     },
     {
         "init_node": 18,
         "term_node": 16,
-        "capacity": 19679.89671,
-        "length": 3,
-        "free_flow_time": 3,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 55
     },
     {
         "init_node": 18,
         "term_node": 20,
-        "capacity": 23403.47319,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 56
     },
     {
         "init_node": 19,
         "term_node": 15,
-        "capacity": 14564.75315,
-        "length": 3,
-        "free_flow_time": 3,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 57
     },
     {
         "init_node": 19,
         "term_node": 17,
-        "capacity": 4823.950831,
-        "length": 2,
-        "free_flow_time": 2,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 58
     },
     {
         "init_node": 19,
         "term_node": 20,
-        "capacity": 5002.607563,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 59
     },
     {
         "init_node": 20,
         "term_node": 18,
-        "capacity": 23403.47319,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 60
     },
     {
         "init_node": 20,
         "term_node": 19,
-        "capacity": 5002.607563,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 61
     },
     {
         "init_node": 20,
         "term_node": 21,
-        "capacity": 5059.91234,
-        "length": 6,
-        "free_flow_time": 6,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 62
     },
     {
         "init_node": 20,
         "term_node": 22,
-        "capacity": 5075.697193,
-        "length": 5,
-        "free_flow_time": 5,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 63
     },
     {
         "init_node": 21,
         "term_node": 20,
-        "capacity": 5059.91234,
-        "length": 6,
-        "free_flow_time": 6,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 64
     },
     {
         "init_node": 21,
         "term_node": 22,
-        "capacity": 5229.910063,
-        "length": 2,
-        "free_flow_time": 2,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 65
     },
     {
         "init_node": 21,
         "term_node": 24,
-        "capacity": 4885.357564,
-        "length": 3,
-        "free_flow_time": 3,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 66
     },
     {
         "init_node": 22,
         "term_node": 15,
-        "capacity": 9599.180565,
-        "length": 3,
-        "free_flow_time": 3,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 67
     },
     {
         "init_node": 22,
         "term_node": 20,
-        "capacity": 5075.697193,
-        "length": 5,
-        "free_flow_time": 5,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 68
     },
     {
         "init_node": 22,
         "term_node": 21,
-        "capacity": 5229.910063,
-        "length": 2,
-        "free_flow_time": 2,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 69
     },
     {
         "init_node": 22,
         "term_node": 23,
-        "capacity": 5000,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 70
     },
     {
         "init_node": 23,
         "term_node": 14,
-        "capacity": 4924.790605,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 71
     },
     {
         "init_node": 23,
         "term_node": 22,
-        "capacity": 5000,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 72
     },
     {
         "init_node": 23,
         "term_node": 24,
-        "capacity": 5078.508436,
-        "length": 2,
-        "free_flow_time": 2,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 73
     },
     {
         "init_node": 24,
         "term_node": 13,
-        "capacity": 5091.256152,
-        "length": 4,
-        "free_flow_time": 4,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 74
     },
     {
         "init_node": 24,
         "term_node": 21,
-        "capacity": 4885.357564,
-        "length": 3,
-        "free_flow_time": 3,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 75
     },
     {
         "init_node": 24,
         "term_node": 23,
-        "capacity": 5078.508436,
-        "length": 2,
-        "free_flow_time": 2,
-        "b": 0.15,
-        "power": 4,
-        "speed": 0,
-        "toll": 0,
-        "link_type": 1
+        "time": 76
     }
 ]

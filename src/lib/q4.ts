@@ -170,7 +170,7 @@ export class VRP {
 
     optimizeRoutes() {
         for (let route of this.Routes) {
-            route = NearestNeighbor(route.map(i => this.Coordinates[i]), 0)
+            //route = NearestNeighbor(route.map(i => this.Coordinates[i]), 0)
         }
     }
 

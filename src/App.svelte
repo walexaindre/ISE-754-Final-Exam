@@ -1,9 +1,10 @@
 <script lang="ts">
   import Q1 from "./lib/Q1.svelte";
+  import Q3 from "./lib/Q3.svelte";
   import Q2 from "./lib/Q2.svelte";
   import Q4 from "./lib/Q4.svelte";
   import Q5 from "./lib/Q5.svelte";
-  let activeQuestion: number = $state(4);
+  let activeQuestion: number = $state(3);
   let totalQuestions: number = 6;
 
   function setActiveQuestion(q: number) {
@@ -32,7 +33,7 @@
   {:else if activeQuestion === 2}
     <Q2 />
   {:else if activeQuestion === 3}
-    <p>Question 3 content goes here.</p>
+    <Q3 />
   {:else if activeQuestion === 4}
     <Q4 />
   {:else if activeQuestion === 5}

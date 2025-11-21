@@ -8,27 +8,6 @@
     import { formatArray } from "../foundation/format";
     import * as Plot from "@observablehq/plot";
 
-    function plt() {
-        const data = Array.from({ length: 100 }, () => ({
-            x: Math.random(),
-            y: Math.random(),
-        }));
-
-        const plot = Plot.plot({
-            marks: [Plot.dot(data, { x: "x", y: "y", fill: "blue" })],
-            width: 600,
-            height: 400,
-            x: { label: "X Axis" },
-            y: { label: "Y Axis" },
-        });
-
-        const plotContainer = document.getElementById("plot");
-        if (plotContainer) {
-            plotContainer.innerHTML = "";
-            plotContainer.appendChild(plot);
-        }
-    }
-
     let dist: number = $state(0);
     let dsta: number = $state(0);
     let dstb: number = $state(0);
