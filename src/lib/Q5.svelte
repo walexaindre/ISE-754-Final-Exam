@@ -6,9 +6,19 @@
         OptimalLocation,
         TotalAccessCost,
         TotalAccessCostForLocations,
+        OptimalNumberOfLocations,
+        OptimalNumberOfLocationsWithLocations,
     } from "./q5";
     import { formatArray } from "../foundation/format";
     import * as Plot from "@observablehq/plot";
+    import Code from "./Code.svelte";
+    import q5 from "./q5.ts?raw";
+    import gradient from "../foundation/gradientDescent.ts?raw";
+
+    let codefiles: { filename: string; code: string }[] = [
+        { filename: "gradientDescent.ts", code: gradient },
+        { filename: "q5.ts", code: q5 },
+    ];
 
     let dist: number = $state(0);
     let dsta: number = $state(0);
@@ -21,6 +31,7 @@
     let opta: number = $state(0);
     let optb: number = $state(1500);
     let optn: number = $state(3);
+    let cT: number = $state(120000);
 
     //<button class="btn btn-active" onclick={plt}> Plt </button>
     //<div id="plot" style="width: 600px; height: 400px;"></div>
@@ -64,6 +75,11 @@
             item.cost < min.cost ? item : min,
         ),
     );
+
+    let optimalNumLocation = $derived(OptimalNumberOfLocations(3, cT));
+    let optimalNumLocationFixed = $derived(
+        OptimalNumberOfLocationsWithLocations(3, cT, locationSet),
+    );
 </script>
 
 <div class="flex justify-center">
@@ -103,10 +119,9 @@
         <button
             role="tab"
             onclick={() => {
-                tab = 4;
+                tab = 5;
             }}
-            class="tab {tab == 4 ? 'tab-active' : ''}"
-            >Continuum Aproximation</button
+            class="tab {tab == 5 ? 'tab-active' : ''}">Code</button
         >
     </div>
 </div>
@@ -340,21 +355,44 @@
             <thead>
                 <tr>
                     <th> Parameter </th>
-                    <th> Value </th>
+                    <th> Value (Optimal Location) </th>
+                    <th> Value (Location Selection)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="text-center">
                     <td class="font-bold"> c<sub>T</sub> </td>
-                    <td>120000 </td>
+                    <td colspan="2">
+                        <label class="input">
+                            <input
+                                type="number"
+                                placeholder="cT"
+                                class="text-center"
+                                bind:value={cT}
+                            />
+                        </label></td
+                    >
                 </tr>
                 <tr class="text-center">
                     <td class="font-bold"> n<sup>*</sup> </td>
-                    <td> - </td>
+                    <td> {optimalNumLocation.optimalNumLocations} </td>
+                    <td>
+                        {optimalNumLocationFixed.optimalNumLocations} ({optimalNumLocationFixed.selectedLocations})
+                    </td>
                 </tr>
                 <tr class="text-center">
                     <td class="font-bold"> z<sup>*</sup> </td>
-                    <td> - </td>
+                    <td>
+                        {optimalNumLocation.minimalCost.toLocaleString("en", {
+                            useGrouping: true,
+                        })}
+                    </td>
+                    <td>
+                        {optimalNumLocationFixed.minimalCost.toLocaleString(
+                            "en",
+                            { useGrouping: true },
+                        )}
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -366,9 +404,86 @@
                     <th> # of Locations </th>
                     <th> Optimal Locations </th>
                     <th> Total Access Cost </th>
+                    <th> Total Regional Cost </th>
                 </tr>
             </thead>
-            <tbody> </tbody>
+            <tbody>
+                <tr>
+                    <td> 1 </td>
+                    <td>
+                        {formatArray(OptimalLocation(0, 1500, 1))}
+                    </td>
+                    <td>
+                        {TotalAccessCost(0, 1500, 1).toLocaleString("en", {
+                            useGrouping: true,
+                        })}
+                    </td>
+                    <td>
+                        {(TotalAccessCost(0, 1500, 1) + 1 * cT).toLocaleString(
+                            "en",
+                            { useGrouping: true },
+                        )}
+                    </td>
+                </tr>
+                <tr>
+                    <td> 2 </td>
+                    <td>
+                        {formatArray(OptimalLocation(0, 1500, 2))}
+                    </td>
+                    <td>
+                        {TotalAccessCost(0, 1500, 2).toLocaleString("en", {
+                            useGrouping: true,
+                        })}
+                    </td>
+                    <td>
+                        {(TotalAccessCost(0, 1500, 2) + 2 * cT).toLocaleString(
+                            "en",
+                            { useGrouping: true },
+                        )}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td> 3 </td>
+                    <td>
+                        {formatArray(OptimalLocation(0, 1500, 3))}
+                    </td>
+                    <td>
+                        {TotalAccessCost(0, 1500, 3).toLocaleString("en", {
+                            useGrouping: true,
+                        })}
+                    </td>
+                    <td>
+                        {(TotalAccessCost(0, 1500, 3) + 3 * cT).toLocaleString(
+                            "en",
+                            { useGrouping: true },
+                        )}
+                    </td>
+                </tr>
+                {#each [minCost1, minCost2, minCost3] as cost, index}
+                    <tr>
+                        <td>
+                            {cost.locations.length}
+                        </td>
+                        <td>
+                            {formatArray(cost.locations)}
+                        </td>
+                        <td>
+                            {cost.cost.toLocaleString("en", {
+                                useGrouping: true,
+                            })}
+                        </td>
+                        <td>
+                            {(
+                                cost.cost +
+                                cost.locations.length * cT
+                            ).toLocaleString("en", { useGrouping: true })}
+                        </td>
+                    </tr>
+                {/each}
+            </tbody>
         </table>
     </div>
+{:else if tab == 5}
+    <Code data={codefiles} />
 {/if}

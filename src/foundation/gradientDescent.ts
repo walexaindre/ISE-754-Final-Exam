@@ -35,6 +35,12 @@ export function GradientDescent2D(c1: number, c2: number, F: (c1: number, c2: nu
 
         if (newObj < obj) {
             obj = newObj;
+        } else {
+            c1 = c1prev;
+            c2 = c2prev;
+            step = step / 2;
+            ctr += 1;
+            continue;
         }
 
         step = Step(c1, c2, c1prev, c2prev);

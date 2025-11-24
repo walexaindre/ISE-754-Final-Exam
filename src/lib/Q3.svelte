@@ -11,8 +11,15 @@
     } from "./q2";
 
     import { Opt2Exchange, Opt3Exchange } from "./q3";
-
     import { FloydWarshall, type Edge } from "../foundation/floydwarshall";
+    import Code from "./Code.svelte";
+    import q3 from "./q3.ts?raw";
+    import permutation from "../foundation/permutation.ts?raw";
+
+    let codefiles: { filename: string; code: string }[] = [
+        { filename: "permutation.ts", code: permutation },
+        { filename: "q3.ts", code: q3 },
+    ];
 
     let links: Array<NetworkLink> = $state([]);
     let nodes: Array<NetworkNode> = $state([]);
@@ -215,6 +222,13 @@
                 tab = 4;
             }}
             class="tab {tab == 4 ? 'tab-active' : ''}">3 Opt - NI</button
+        >
+        <button
+            role="tab"
+            onclick={() => {
+                tab = 5;
+            }}
+            class="tab {tab == 5 ? 'tab-active' : ''}">Code</button
         >
     </div>
 </div>
@@ -592,4 +606,6 @@
             </table>
         </div>
     </div>
+{:else if tab == 5}
+    <Code data={codefiles} />
 {/if}

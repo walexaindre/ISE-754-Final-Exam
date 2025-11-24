@@ -10,6 +10,31 @@
         TotalDistance,
     } from "./q2";
     import { FloydWarshall, type Edge } from "../foundation/floydwarshall";
+    import Code from "./Code.svelte";
+
+    import q2 from "./q2?raw";
+    import q2nodes from "../assets/q2node.json?raw";
+    import q2arcs from "../assets/q2arcs.json?raw";
+    import floyd from "../foundation/floydwarshall.ts?raw";
+
+    let codefiles: { filename: string; code: string }[] = [
+        {
+            filename: "floydwarshall.ts",
+            code: floyd,
+        },
+        {
+            filename: "q2.ts",
+            code: q2,
+        },
+        {
+            filename: "q2arcs.json",
+            code: q2arcs,
+        },
+        {
+            filename: "q2nodes.json",
+            code: q2nodes,
+        },
+    ];
 
     let links: Array<NetworkLink> = $state([]);
     let nodes: Array<NetworkNode> = $state([]);
@@ -263,6 +288,22 @@
     let nodea = $state(1);
     let nodeb = $state(1);
 
+    let optzstar = $state(685);
+
+    let ZNN = $derived(TotalDistance(NNeighbor, FloydW) / optzstar);
+    let ZNI = $derived(TotalDistance(NInsertion, FloydW) / optzstar);
+
+    let NodesCount = $derived(nodes.length);
+
+    let OptimalBoundNN = $derived(
+        0.5 * (Math.ceil(Math.log2(nodes.length)) + 1),
+    );
+
+    let OptimalBoundNI = $derived(2);
+
+    let BoundFulfilledNN = $derived(ZNN < OptimalBoundNN);
+    let BoundFulfilledNI = $derived(ZNI < OptimalBoundNI);
+
     let tab: number = $state(0);
 </script>
 
@@ -298,11 +339,18 @@
             class="tab {tab == 1 ? 'tab-active' : ''}"
             >Floyd Warshall Distance Matrix</button
         >
+        <button
+            role="tab"
+            onclick={() => {
+                tab = 4;
+            }}
+            class="tab {tab == 4 ? 'tab-active' : ''}">Code</button
+        >
     </div>
 </div>
 
 {#if tab == 0}
-    <div class="flex row">
+    <div class=" flex flex-row items-center gap-4 flex-wrap">
         <div>
             <table
                 class="table table-md w-full mt-4 border-2 border-base-content/5"
@@ -381,12 +429,25 @@
             <table
                 class="table table-md w-full mt-4 border-2 border-base-content/5"
             >
-                <tbody
-                    ><tr>
+                <tbody>
+                    <tr>
+                        <td class="font-bold"> Optimal z* </td>
+                        <td colspan="4" class="text-center">
+                            <input
+                                class="input text-center"
+                                type="number"
+                                bind:value={optzstar}
+                            />
+                        </td>
+                        <td class="font-bold">Theoretically Bounded</td>
+                    </tr>
+                    <tr>
                         <td class="font-bold"> Z<sup>NN</sup>/z* </td>
                         <td class="text-center">
-                            {TotalDistance(NNeighbor, FloydW) / 685}
-                        </td><td></td>
+                            {(
+                                TotalDistance(NNeighbor, FloydW) / optzstar
+                            ).toLocaleString("en", { useGrouping: true })}
+                        </td><td> {BoundFulfilledNN ? "<" : ">"} </td>
                         <td class="font-bold"> 0.5([log<sub>2</sub> n] +1)</td>
 
                         <td class="text-center">
@@ -395,16 +456,26 @@
                                 (Math.ceil(Math.log2(nodes.length)) + 1)
                             ).toLocaleString("en", { useGrouping: true })}
                         </td>
+                        <td class="text-center">
+                            {BoundFulfilledNN ? "Yes" : "No"}
+                        </td>
                     </tr>
 
                     <tr>
                         <td class="font-bold"> Z<sup>NI</sup>/z* </td>
                         <td class="text-center">
-                            {TotalDistance(NInsertion, FloydW) / 685}
-                        </td><td></td>
+                            {(
+                                TotalDistance(NInsertion, FloydW) / optzstar
+                            ).toLocaleString("en", {
+                                useGrouping: true,
+                            })}
+                        </td><td> {BoundFulfilledNI ? "<" : ">"} </td>
                         <td class="font-bold"> 2</td>
 
                         <td class="text-center"> 2 </td>
+                        <td class="text-center">
+                            {BoundFulfilledNI ? "Yes" : "No"}
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -572,4 +643,6 @@
     <div class="flex justify-center">
         {@html plotTour(NInsertion).outerHTML}
     </div>
+{:else if tab == 4}
+    <Code data={codefiles} />
 {/if}

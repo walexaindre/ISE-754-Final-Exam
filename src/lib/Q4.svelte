@@ -1,6 +1,16 @@
 <script lang="ts">
     import { ExplainMergeAttempt, VRP } from "./q4";
+    import Code from "./Code.svelte";
     import * as Plot from "@observablehq/plot";
+
+    import q4 from "./q4.ts?raw";
+
+    let codefiles = [
+        {
+            filename: "q4.ts",
+            code: q4,
+        },
+    ];
 
     let depotIndex: number = 0;
 
@@ -181,6 +191,13 @@
                 tab = 2;
             }}
             class="tab {tab == 2 ? 'tab-active' : ''}">Merge Attempts</button
+        >
+        <button
+            role="tab"
+            onclick={() => {
+                tab = 3;
+            }}
+            class="tab {tab == 3 ? 'tab-active' : ''}">Code</button
         >
     </div>
 </div>
@@ -467,4 +484,6 @@
             </tbody>
         </table>
     </div>
+{:else if tab == 3}
+    <Code data={codefiles} />
 {/if}

@@ -5,8 +5,8 @@
   import Q4 from "./lib/Q4.svelte";
   import Q5 from "./lib/Q5.svelte";
   import Q6 from "./lib/Q6.svelte";
-  let activeQuestion: number = $state(3);
-  let totalQuestions: number = 6;
+  let activeQuestion: number = $state(1);
+  let totalQuestions: number = 5;
 
   function setActiveQuestion(q: number) {
     activeQuestion = q;

@@ -1,10 +1,20 @@
 import { TotalDistance } from "./q2";
 import { permutations } from "../foundation/permutation";
 
-function Opt2ExchangeBase(route: Array<number>, dstMatrix: Array<Array<number>>, iterations: number = 1): { route: Array<number>, history: { i: number; j: number, feasible: boolean, currentDistance: number, newDistance: number, delta: number, route: Array<number> }[] } {
+type Opt2Data = {
+    i: number; j: number, feasible: boolean, currentDistance: number,
+    newDistance: number, delta: number, route: Array<number>
+}
+
+type Opt2Result = {
+    route: Array<number>,
+    history: Opt2Data[]
+}
+
+function Opt2ExchangeBase(route: Array<number>, dstMatrix: Array<Array<number>>, iterations: number = 1): Opt2Result {
     const n = route.length;
     let countSwaps = 0;
-    const Attempts: { i: number; j: number, feasible: boolean, currentDistance: number, newDistance: number, delta: number, route: number[] }[] = [];
+    const Attempts: Opt2Data[] = [];
 
     let newRoute = route.slice();
 
@@ -18,9 +28,15 @@ function Opt2ExchangeBase(route: Array<number>, dstMatrix: Array<Array<number>>,
         if (newDistance < currentDistance) {
             countSwaps++;
             route = newRoute.slice();
-            Attempts.push({ i: route[i], j: route[j], feasible: true, currentDistance, newDistance, delta: currentDistance - newDistance, route: route.slice() });
+            Attempts.push({
+                i: route[i], j: route[j], feasible: true, currentDistance,
+                newDistance, delta: currentDistance - newDistance, route: route.slice()
+            });
         } else {
-            Attempts.push({ i: route[i], j: route[j], feasible: false, currentDistance, newDistance, delta: currentDistance - newDistance, route: route.slice() });
+            Attempts.push({
+                i: route[i], j: route[j], feasible: false, currentDistance,
+                newDistance, delta: currentDistance - newDistance, route: route.slice()
+            });
             [newRoute[i], newRoute[j]] = [newRoute[j], newRoute[i]];
             newRoute[n - 1] = newRoute[0];
         }
@@ -28,14 +44,14 @@ function Opt2ExchangeBase(route: Array<number>, dstMatrix: Array<Array<number>>,
         if (countSwaps >= iterations) {
             break;
         }
-
     }
 
     return { route, history: Attempts };
 }
 
-export function Opt2Exchange(route: Array<number>, dstMatrix: Array<Array<number>>, iterations: number): { route: Array<number>, history: { i: number; j: number, feasible: boolean, currentDistance: number, newDistance: number, delta: number, route: Array<number> }[] } {
-    const Attempts: { i: number; j: number, feasible: boolean, currentDistance: number, newDistance: number, delta: number, route: number[] }[] = [];
+
+export function Opt2Exchange(route: Array<number>, dstMatrix: Array<Array<number>>, iterations: number): Opt2Result {
+    const Attempts: Opt2Data[] = [];
     for (let iter = 0; iter < iterations; iter++) {
         const result = Opt2ExchangeBase(route, dstMatrix, 1);
         route = result.route;
@@ -44,9 +60,19 @@ export function Opt2Exchange(route: Array<number>, dstMatrix: Array<Array<number
     return { route, history: Attempts };
 }
 
+type Opt3Data = {
+    i: number; j: number; k: number; feasible: boolean; currentDistance: number;
+    newDistance: number, delta: number, route: Array<number>
+}
 
-export function Opt3Exchange(route: Array<number>, dstMatrix: Array<Array<number>>, iterations: number): { route: Array<number>, history: { i: number; j: number; k: number; feasible: boolean; currentDistance: number; newDistance: number, delta: number, route: Array<number> }[] } {
-    const Attempts: { i: number; j: number; k: number; feasible: boolean; currentDistance: number; newDistance: number, delta: number, route: Array<number> }[] = [];
+type Opt3Result = {
+    route: Array<number>,
+    history: Opt3Data[]
+}
+
+
+export function Opt3Exchange(route: Array<number>, dstMatrix: Array<Array<number>>, iterations: number): Opt3Result {
+    const Attempts: Opt3Data[] = [];
     for (let iter = 0; iter < iterations; iter++) {
         const result = Opt3ExchangeBase(route, dstMatrix, 1);
         route = result.route;
@@ -54,10 +80,11 @@ export function Opt3Exchange(route: Array<number>, dstMatrix: Array<Array<number
     }
     return { route, history: Attempts };
 }
-function Opt3ExchangeBase(route: Array<number>, dstMatrix: Array<Array<number>>, iterations: number = 1): { route: Array<number>, history: { i: number; j: number; k: number; feasible: boolean; currentDistance: number; newDistance: number, delta: number, route: Array<number> }[] } {
+
+function Opt3ExchangeBase(route: Array<number>, dstMatrix: Array<Array<number>>, iterations: number = 1): Opt3Result {
     const n = route.length;
     let countSwaps = 0;
-    const Attempts: { i: number; j: number; k: number; feasible: boolean; currentDistance: number; newDistance: number; delta: number, route: number[] }[] = [];
+    const Attempts: Opt3Data[] = [];
 
     let newRoute = route.slice();
 
@@ -72,9 +99,15 @@ function Opt3ExchangeBase(route: Array<number>, dstMatrix: Array<Array<number>>,
         if (newDistance < currentDistance) {
             countSwaps++;
             route = newRoute.slice();
-            Attempts.push({ i: route[i], j: route[j], k: route[k], feasible: true, currentDistance, newDistance, delta: currentDistance - newDistance, route: route.slice() });
+            Attempts.push({
+                i: route[i], j: route[j], k: route[k], feasible: true,
+                currentDistance, newDistance, delta: currentDistance - newDistance, route: route.slice()
+            });
         } else {
-            Attempts.push({ i: route[i], j: route[j], k: route[k], feasible: false, currentDistance, newDistance, delta: currentDistance - newDistance, route: route.slice() });
+            Attempts.push({
+                i: route[i], j: route[j], k: route[k], feasible: false,
+                currentDistance, newDistance, delta: currentDistance - newDistance, route: route.slice()
+            });
             [newRoute[i], newRoute[j], newRoute[k]] = [newRoute[j], newRoute[k], newRoute[i]];
             newRoute[n - 1] = newRoute[0];
         }
@@ -82,8 +115,6 @@ function Opt3ExchangeBase(route: Array<number>, dstMatrix: Array<Array<number>>,
         if (countSwaps >= iterations) {
             break;
         }
-
-
     }
 
     return { route, history: Attempts };

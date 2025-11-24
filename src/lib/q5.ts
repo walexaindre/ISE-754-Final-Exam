@@ -124,7 +124,6 @@ export function TotalAccessCostForLocations(a: number, b: number, n: number, loc
     return Results;
 }
 
-
 export function OptimalLocation(a: number, b: number, n: number, Boundary: Array<number> | null = null): Array<number> {
     if (n == 1) {
         const inte = IntegralCummulativeDemand(a, b)
@@ -179,6 +178,49 @@ export function OptimalLocation(a: number, b: number, n: number, Boundary: Array
         }
         return [OptimalLocation(a, c1, 1)[0], OptimalLocation(c1, c2, 1)[0], OptimalLocation(c2, b, 1)[0]];
     }
-
     return []
+}
+
+export function RegionalCost(n: number, unitCostPerLocation: number): number {
+    const accessCost = TotalAccessCost(0, 1500, n);
+    const locationCost = n * unitCostPerLocation;
+    return accessCost + locationCost;
+}
+
+export function OptimalNumberOfLocations(maxLocations: number, unitCostPerLocation: number): { optimalNumLocations: number, minimalCost: number } {
+    let optimalNumLocations = 1;
+    let minimalCost = RegionalCost(1, unitCostPerLocation);
+
+    for (let n = 2; n <= maxLocations; n++) {
+        const cost = RegionalCost(n, unitCostPerLocation);
+        if (cost < minimalCost) {
+            minimalCost = cost;
+            optimalNumLocations = n;
+        }
+    }
+
+    return { optimalNumLocations, minimalCost };
+}
+
+
+type LocationResult = { optimalNumLocations: number, minimalCost: number, selectedLocations: Array<number> };
+
+export function OptimalNumberOfLocationsWithLocations(maxLocations: number, unitCostPerLocation: number, locations: Array<number>): LocationResult {
+    let optimalNumLocations = 1;
+    let minimalCost = RegionalCost(1, unitCostPerLocation);
+    let selectedLocations: Array<number> = [];
+
+    for (let n = 1; n <= maxLocations; n++) {
+        const results = TotalAccessCostForLocations(0, 1500, n, locations);
+        for (const result of results) {
+            const cost = result.cost + n * unitCostPerLocation;
+            if (cost < minimalCost) {
+                minimalCost = cost;
+                optimalNumLocations = n;
+                selectedLocations = result.locations;
+            }
+        }
+    }
+
+    return { optimalNumLocations, minimalCost, selectedLocations };
 }
